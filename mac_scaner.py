@@ -3,8 +3,9 @@ import machine
 from bluetooth import BLE
 from binascii import hexlify
 from micropython import const
+from time import localtime, sleep
 
-from xiaomi_ble_adv_parse import parse_adv_data
+
 
 # PIN2 PWM parameters
 led_pin = machine.Pin(2, machine.Pin.OUT)
@@ -41,7 +42,7 @@ def handle_scan(ev, data):
 BLE().active(True)
 BLE().irq(handle_scan)
 print("Start scanning...")
-BLE().gap_scan(0, 55000, 25250)  # scan often & indefinitely
+BLE().gap_scan(0, 50000, 25250)  # scan often & indefinitely
 
 while True:
     sleep(5)
